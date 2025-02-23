@@ -80,6 +80,40 @@
         background-position: center;
         background-repeat: no-repeat;
       }
+
+      /* Custom Cursor Styles */
+      #custom-cursor {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: rgb(255, 158, 78);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out;
+        box-shadow: 0 0 10px 5px rgba(255, 158, 78, 0.7); /* Glow effect */
+      }
+
+      /* Circle Div */
+      #circle-container {
+        position: absolute;
+        width: 35px; /* 50px radius * 2 */
+        height: 35px; /* 50px radius * 2 */
+        pointer-events: none;
+        z-index: 9998;
+
+        transform: translate(-50%, -50%);
+      }
+
+      #circle {
+        width: 100%;
+        height: 100%;
+        border: 2px solid rgb(255, 158, 78); /* 1px stroke */
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px 5px rgba(255, 158, 78, 0.7); /* Glow effect */
+      }
     </style>
   </head>
 
@@ -87,6 +121,26 @@
     <canvas></canvas>
     <video id="videoBackground" muted loop></video>
     <div id="overlay"></div>
+    <div id="custom-cursor"></div>
+    <!-- Custom Cursor Element -->
+    <div id="circle-container">
+      <div id="circle"></div>
+    </div>
     <script src="js/script.js"></script>
+    <script>
+      // JavaScript to make the custom cursor and circle follow the mouse
+      const customCursor = document.getElementById("custom-cursor");
+      const circleContainer = document.getElementById("circle-container");
+
+      document.addEventListener("mousemove", (e) => {
+        customCursor.style.left = `${e.clientX}px`;
+        customCursor.style.top = `${e.clientY}px`;
+        circleContainer.style.left = `${e.clientX}px`;
+        circleContainer.style.top = `${e.clientY}px`;
+      });
+
+      // Hide the default cursor
+      document.body.style.cursor = "none";
+    </script>
   </body>
 </html>
